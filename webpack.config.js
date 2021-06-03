@@ -23,7 +23,11 @@ module.exports = (env, argv) => {
                 {
                     test: /\.css$/,
                     use: ["style-loader", "css-loader"]
-                }
+                },
+                {
+                    test: /\.svg$/,
+                    type: 'asset/inline',
+                },
             ]
         },
         plugins: [
