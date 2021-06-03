@@ -18,6 +18,14 @@ module.exports = (env, argv) => {
                 ? '[name].[contenthash].bundle.js'
                 : '[name].bundle.js',
         },
+        module: {
+            rules: [
+                {
+                    test: /\.css$/,
+                    use: ["style-loader", "css-loader"]
+                }
+            ]
+        },
         plugins: [
             new HtmlWebpackPlugin({
                 title: 'webpack Boilerplate',
