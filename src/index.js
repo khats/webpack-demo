@@ -1,1 +1,5 @@
-console.log("Webpack lecture!")
+const heading = document.createElement('h1');
+heading.textContent = 'Webpack lecture!';
+
+const root = document.querySelector('#root');
+root.append(heading);
