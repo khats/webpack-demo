@@ -1,8 +1,12 @@
 import * as React from "react";
 import { useState } from "react";
 import { render } from "react-dom";
+import {logger} from "./shared-file";
+import {logger2} from "./shared-file2";
 
 function App() {
+    logger();
+    logger2();
     const [count, setCounter] = useState(0);
 
     return <button onClick={() => setCounter(count + 1)}>{`Clicked ${count}`}</button>;

@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = (env, argv) => {
     return {
         devServer: {
@@ -10,13 +10,20 @@ module.exports = (env, argv) => {
             hot: true
         },
         entry: {
-            main: path.resolve(__dirname, './src/index.tsx'),
+            rootReact: path.resolve(__dirname, './src/root.tsx'),
+            rootTs: path.resolve(__dirname, './src/index.ts'),
         },
         output: {
             path: path.resolve(__dirname, './dist'),
             filename: argv.mode === "production"
                 ? '[name].[contenthash].bundle.js'
                 : '[name].bundle.js',
+        },
+        optimization: {
+            splitChunks: {
+                chunks: 'all',
+                minSize: 0,
+            },
         },
         resolve: {
             extensions: ['.tsx','.ts', '.js'],
@@ -30,7 +37,7 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.css$/,
-                    use: ["style-loader", "css-loader"]
+                    use: [MiniCssExtractPlugin.loader, "css-loader"]
                 },
                 {
                     test: /\.svg$/,
@@ -43,8 +50,10 @@ module.exports = (env, argv) => {
                 title: 'webpack Boilerplate',
                 template: path.resolve(__dirname, './src/template.html'), // шаблон
                 filename: 'index.html', // название выходного файла
+                chunks : ['rootTs'],
             }),
             new CleanWebpackPlugin(),
+            new MiniCssExtractPlugin(),
         ],
     }
 }
