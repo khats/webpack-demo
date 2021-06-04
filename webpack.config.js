@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
             hot: true
         },
         entry: {
-            main: path.resolve(__dirname, './src/index.js'),
+            main: path.resolve(__dirname, './src/index.ts'),
         },
         output: {
             path: path.resolve(__dirname, './dist'),
@@ -18,8 +18,16 @@ module.exports = (env, argv) => {
                 ? '[name].[contenthash].bundle.js'
                 : '[name].bundle.js',
         },
+        resolve: {
+            extensions: ['.tsx','.ts', '.js'],
+        },
         module: {
             rules: [
+                {
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
+                    exclude: /node_modules/,
+                },
                 {
                     test: /\.css$/,
                     use: ["style-loader", "css-loader"]

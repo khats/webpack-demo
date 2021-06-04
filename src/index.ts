@@ -1,5 +1,5 @@
 import "./styles.css";
-import cat from './cat.svg'
+import cat from "./cat.svg";
 const heading = document.createElement('h1');
 heading.textContent = 'Webpack lecture!';
 
