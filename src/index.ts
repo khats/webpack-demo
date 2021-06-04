@@ -12,3 +12,7 @@ root.append(heading);
 const catImg = document.createElement('img');
 catImg.src = cat;
 root.append(catImg);
+
+setTimeout(()=>{
+    import("./heavy-file");
+}, 3000);
